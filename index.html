@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>My Game</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        #joystick-container {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 2px solid #ccc;
+        }
+
+
+        .circle-btn {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            margin-right: 10px;
+            border-radius: 50%;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 60px;
+            text-decoration: none;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            transition: transform 0.1s ease-in-out;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .circle-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .circle-btn:active {
+            transform: scale(0.95);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+        }
+
+        /* #joystick {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #ccc;
+        } */
+
+        #landscape-warning {
+            visibility: hidden;
+        }
+
+        @media (orientation: portrait) {
+
+            .btns,
+            #joystick-container {
+                visibility: hidden !important;
+            }
+        }
+
+        .btns {
+            display: flex;
+            transform: translateX(-50%);
+            text-align: center;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 210px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <canvas width="800" height="600"></canvas>
+    <div id="joystick-container">
+        <div id="joystick"></div>
+    </div>
+    <div class="btns">
+        <a href="#" id="attack-button" class="circle-btn">Attack</a>
+        <a href="#" id="pause-button" class="circle-btn">Pause</a>
+        <a href="#" id="restart-button" class="circle-btn" style="display: none;">Restart</a>
+    </div>
+    <div id="landscape-warning">
+        <p>Please rotate your device to landscape mode to play the game.</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/nipplejs@0.10.1/dist/nipplejs.min.js"></script>
+    <script src="./dist/index.js"></script>
+    <script>
+        const canvas = document.querySelector("canvas");
+        const landscapeWarning = document.querySelector("#landscape-warning");
+
+        function checkOrientation() {
+            if (window.orientation === 0 || window.orientation === 180) {
+                // 竖屏
+                canvas.style.display = "none";
+                landscapeWarning.style.visibility = "visible";
+            } else {
+                // 横屏
+                canvas.style.display = "block";
+                landscapeWarning.style.visibility = "hidden";
+            }
+        }
+
+        // 在页面加载完成后检查屏幕方向
+        checkOrientation();
+        // 监听屏幕旋转事件
+        window.addEventListener("orientationchange", checkOrientation);
+
+
+    </script>
+</body>
+
+</html>
