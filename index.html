@@ -67,8 +67,11 @@
         }
 
         #landscape-warning {
+            z-index: 3;
             visibility: hidden;
             color: white;
+            position: absolute;
+            top: 0;
         }
 
         @media (orientation: portrait) {
@@ -121,17 +124,24 @@
     <script src="./dist/index.js"></script>
     <script>
         const canvas = document.querySelector("canvas");
+        const operateCanvas = document.getElementById("operate-canvas")
         const landscapeWarning = document.querySelector("#landscape-warning");
 
         function checkOrientation() {
             if (window.orientation === 0 || window.orientation === 180) {
                 // 竖屏
-                canvas.style.display = "none";
                 landscapeWarning.style.visibility = "visible";
+                canvas.style.visibility = "hidden";
+                operateCanvas.style.visibility = "hidden";
             } else {
                 // 横屏
-                canvas.style.display = "block";
                 landscapeWarning.style.visibility = "hidden";
+                canvas.style.visibility = "visible";
+                operateCanvas.style.visibility = "visible";
+                console.log('123')
+                setTimeout(() => {
+                    window.start()
+                }, 100);
             }
         }
 
