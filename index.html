@@ -16,12 +16,15 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
+            background-color: black;
         }
 
         canvas {
             display: block;
-            width: 100%;
+            /* width: 100%; */
+            margin: auto;
             height: 100%;
+            background-color: white;
         }
 
         #joystick-container {
@@ -49,6 +52,7 @@
             line-height: 60px;
             text-decoration: none;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+
             transition: transform 0.1s ease-in-out;
             -webkit-tap-highlight-color: transparent;
         }
@@ -62,19 +66,9 @@
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
         }
 
-        /* #joystick {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: #ccc;
-        } */
-
         #landscape-warning {
             visibility: hidden;
+            color: white;
         }
 
         @media (orientation: portrait) {
@@ -94,19 +88,31 @@
             right: 10px;
             width: 210px;
         }
+
+        #operate-canvas {
+            position: absolute;
+            top: 0;
+            background: transparent;
+        }
+
+        @font-face {
+            font-family: 'Kenney';
+            src: url('./assets/Kenney.ttf');
+        }
     </style>
 
 </head>
 
 <body>
-    <canvas width="800" height="600"></canvas>
+    <canvas width="1600" height="900"></canvas>
+    <canvas id="operate-canvas"></canvas>
     <div id="joystick-container">
         <div id="joystick"></div>
     </div>
     <div class="btns">
-        <a href="#" id="attack-button" class="circle-btn">Attack</a>
+        <!-- <a href="#" id="attack-button" class="circle-btn">Attack</a>
         <a href="#" id="pause-button" class="circle-btn">Pause</a>
-        <a href="#" id="restart-button" class="circle-btn" style="display: none;">Restart</a>
+        <a href="#" id="restart-button" class="circle-btn" style="display: none;">Restart</a> -->
     </div>
     <div id="landscape-warning">
         <p>Please rotate your device to landscape mode to play the game.</p>
@@ -133,8 +139,6 @@
         checkOrientation();
         // 监听屏幕旋转事件
         window.addEventListener("orientationchange", checkOrientation);
-
-
     </script>
 </body>
 
